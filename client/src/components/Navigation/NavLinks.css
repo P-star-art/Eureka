@@ -16,13 +16,13 @@
   
   .nav-links a {
     /* border: 1px solid transparent; */
-    color: #059669;
+    color:white;
     padding: 0.5rem;
     transition: 0.7s;
     border-radius: 5px;
 
   text-decoration: none;
-  color: #059669;
+  color: white;
   font-weight: 800;
   text-transform: uppercase;
   }
@@ -47,7 +47,7 @@ nav ul li a:hover {
   .nav-links button {
     cursor: pointer;
     /* border: 1px solid #292929; */
-    color: #059669;
+    color: white;
     background: transparent;
     padding: 0.5rem;
     font: inherit;
@@ -59,7 +59,7 @@ nav ul li a:hover {
   
   .nav-links button:hover,
   .nav-links button:active {
-    color: white;
+    color: #059669;
   }
   
   @media (min-width: 768px) {
