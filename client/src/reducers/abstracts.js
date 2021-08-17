@@ -3,7 +3,7 @@ export default (abstracts = [], action) => {
         case 'FETCH_ALL':
             return action.payload;
         case 'CREATE':
-            return abstracts;
+            return [...abstracts, action.payload];
         default:
             return abstracts;
     }

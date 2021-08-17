@@ -9,3 +9,12 @@ export const getAbstracts = () => async (dispatch) => {
     }
     
 }
+
+export const createAbstract = (abstract) => async (dispatch) => {
+    try {
+      const { data } = await api.createAbstract(abstract);
+      dispatch({ type: 'CREATE', payload: data });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
