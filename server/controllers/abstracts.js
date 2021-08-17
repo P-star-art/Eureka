@@ -3,7 +3,7 @@ import AbstractMessage from "../models/abstractMessage.js";
 export const getAbstracts = async (req, res) => {
     try {
         const abstractMessages = await AbstractMessage.find();
-        console.log(abstractMessages);
+        // console.log(abstractMessages);
         res.status(200).json(abstractMessages);
     } catch (error) {
         res.status(404).json({ message: error.message });
