@@ -9,7 +9,7 @@ export default makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(2),
     width: "90%",
-    maxWidth: "500px",
+    maxWidth: "900px",
     margin: "auto",
     marginTop: "150px",
   },
@@ -29,5 +29,10 @@ export default makeStyles((theme) => ({
   },
   buttonSubmit: {
     marginBottom: 10,
+  },
+  cardActions: {
+    padding: '0 16px 8px 16px',
+    display: 'flex',
+    justifyContent: 'space-between',
   },
 }));

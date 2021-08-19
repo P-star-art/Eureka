@@ -4,6 +4,8 @@ export default (abstracts = [], action) => {
             return action.payload;
         case 'CREATE':
             return [...abstracts, action.payload];
+        case 'DELETE':
+            return abstracts.filter((abstract) => abstract._id !== action.payload);
         default:
             return abstracts;
     }

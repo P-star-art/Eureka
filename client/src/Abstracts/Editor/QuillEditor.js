@@ -433,7 +433,7 @@ class QuillEditor extends React.Component {
           <button className="ql-clean" />
         </div>
         <ReactQuill
-          // style={{width: "700px"}}
+          style={{width: "850px"}}
           ref={(el) => {
             this.reactQuillRef = el;
           }}

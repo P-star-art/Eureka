@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import AbstractMessage from "../models/abstractMessage.js";
 
 export const getAbstracts = async (req, res) => {
@@ -19,4 +20,11 @@ export const createAbstract = async (req, res) => {
     } catch (error) {
         res.status(409).json({ message: error.message });
     }
+}
+
+export const deleteAbstract = async (req, res) => {
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No abstract with that id');
+    await AbstractMessage.findByIdAndDelete(id);
+    res.json({ message: 'Post deleted Successfully' });
 }
