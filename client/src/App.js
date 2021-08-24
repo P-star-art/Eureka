@@ -9,6 +9,7 @@ import Footer from './components/Footer/Footer';
 import MainNavigation from './components/Navigation/MainNavigation';
 import CreateAbstract from "./Abstracts/CreateAbstract";
 import Feed from "./Abstracts/Feed";
+import Auth from "./components/Auth/Auth";
 
 function App() {
   return (
@@ -28,7 +29,7 @@ function App() {
           <Eureka3 />
         </Route>
         <Route path="/auth" exact>
-          Auth
+          <Auth />
         </Route>
         <Route path="/abstract/create" exact>
           <CreateAbstract />
