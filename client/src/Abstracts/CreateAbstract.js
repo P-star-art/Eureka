@@ -28,12 +28,17 @@ const CreateAbstract = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(createAbstract(abstractData));
+        clear();
         history.push("/feed");
     }
 
     useEffect(() => {
         setAbstractData({ ...abstractData, message: content });
     }, [content]);
+
+    const clear = () => {
+        setAbstractData({ creator: '', title: '', message: '' });
+    }
 
     return (
         <Paper className={classes.paper}>
