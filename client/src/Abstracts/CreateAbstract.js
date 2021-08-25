@@ -9,13 +9,14 @@ import { createAbstract } from '../actions/abstracts';
 
 const CreateAbstract = () => {
     const [abstractData, setAbstractData] = useState({
-        creator: '', title: '', message: ''
+        title: '', message: ''
     })
     const [content, setContent] = useState("");
     const [files, setFiles] = useState([]);
     const classes = useStyles();
     const dispatch = useDispatch();
     const history = useHistory();
+    const user = JSON.parse(localStorage.getItem('profile'));
 
     const onFilesChange = (files) => {
         setFiles(files);
@@ -27,7 +28,7 @@ const CreateAbstract = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(createAbstract(abstractData));
+        dispatch(createAbstract({...abstractData, name: user?.result?.teamName }));
         clear();
         history.push("/feed");
     }
@@ -37,14 +38,13 @@ const CreateAbstract = () => {
     }, [content]);
 
     const clear = () => {
-        setAbstractData({ creator: '', title: '', message: '' });
+        setAbstractData({ title: '', message: '' });
     }
 
     return (
         <Paper className={classes.paper}>
             <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
                 <Typography variant="h6">Submit Your Abstract</Typography>
-                <TextField name="creator" variant="outlined" label="Creator" fullWidth value={abstractData.creator} onChange={(e) => setAbstractData({ ...abstractData, creator: e.target.value })} />
                 <QuillEditor
                     style={{ marginBottom: "30px" }}
                     placeholder={"Start Posting Something!"}

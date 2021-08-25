@@ -13,7 +13,7 @@ export const getAbstracts = async (req, res) => {
 
 export const createAbstract = async (req, res) => {
     const abstract = req.body;
-    const newAbstract = new AbstractMessage(abstract);
+    const newAbstract = new AbstractMessage({...abstract, creator: req.userId});
     try {
         await newAbstract.save();
         res.status(201).json(newAbstract);

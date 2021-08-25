@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 const abstractSchema = mongoose.Schema({
     title: String,
     message: String,
+    name: String,
     creator: String,
     createdAt: {
         type: Date,

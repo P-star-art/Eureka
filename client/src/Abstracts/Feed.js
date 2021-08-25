@@ -11,7 +11,7 @@ import {
     Typography,
     ButtonBase,
 } from "@material-ui/core";
-import DeleteIcon from "@material-ui/icons/Delete";  
+import DeleteIcon from "@material-ui/icons/Delete";
 
 import { deleteAbstract } from '../actions/abstracts';
 import useStyles from './styles';
@@ -22,6 +22,7 @@ const Feed = () => {
 
     const dispatch = useDispatch();
     const classes = useStyles();
+    const user = JSON.parse(localStorage.getItem("profile"))
 
     useEffect(() => {
         dispatch(getAbstracts());
@@ -58,15 +59,20 @@ const Feed = () => {
                                         <div key={abstract._id} style={{ marginBottom: "20px", padding: "20px" }} className="col-md-10 col-lg-10 col-sm-6 abstract-card">
                                             <div class="card">
                                                 <div style={{ textAlign: "center" }} class="card-body">
+                                                    <h5 style={{ color: "blue" }}>{abstract.name}</h5>
                                                     <h2 style={{ fontSize: "23px" }} class="card-title">{abstract.title}</h2>
                                                     <p style={{ alignSelf: "left!important" }}>Published at {moment(abstract.createdAt).format("MMM Do YYYY")}</p>
                                                     {/* <p style={{ color: "#5d5e8d", fontSize: "18px" }} class="card-text">{abstract.message}</p> */}
-                                                    <div style={{color: "rgb(93, 94, 141)"}} dangerouslySetInnerHTML={{ __html: abstract.message }}></div>
+                                                    <div style={{ color: "rgb(93, 94, 141)" }} dangerouslySetInnerHTML={{ __html: abstract.message }}></div>
                                                 </div>
                                                 <CardActions className={classes.cardActions}>
-                                                    <Button size="small" color="primary" onClick={() => dispatch(deleteAbstract(abstract._id))}>
-                                                        <DeleteIcon fontSize="small" />Delete
-                                                    </Button>
+                                                    {
+                                                        user?.result?._id === abstract.creator && (
+                                                            <Button size="small" color="primary" onClick={() => dispatch(deleteAbstract(abstract._id))}>
+                                                                <DeleteIcon fontSize="small" />Delete
+                                                            </Button>
+                                                        )
+                                                    }
                                                 </CardActions>
                                             </div>
                                         </div>

@@ -1,13 +1,38 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { NavLink, useHistory, useLocation } from 'react-router-dom';
 import { AppBar, Typography, Toolbar, Avatar, Button } from '@material-ui/core';
+import decode from 'jwt-decode';
 
 import './NavLinks.css';
 import useStyles from './styles';
+import { useDispatch } from 'react-redux';
+import { LOGOUT } from '../../constants/actionTypes';
 
 const NavLinks = () => {
     const classes = useStyles();
-    const user = null;
+    const history = useHistory();
+    const dispatch = useDispatch();
+    const location = useLocation();
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+
+    const logout = () => {
+        dispatch({ type: LOGOUT })
+        history.push('/');
+        setUser(null);
+    }
+
+    useEffect(() => {
+
+        const token = user?.token;
+
+        if (token) {
+            const decodedToken = decode(token);
+
+            if (decodedToken.exp * 1000 < new Date().getTime()) logout();
+        }
+
+        setUser(JSON.parse(localStorage.getItem("profile")));
+    }, [location]);
 
     return (
         <ul className="nav-links">
@@ -26,20 +51,33 @@ const NavLinks = () => {
             <li>
                 <NavLink to="/eureka1">Eureka 1.0</NavLink>
             </li>
-            {
-                user ? (
-                    <div>
-                        <Typography className={classes.userName} variant="h6">{user?.result.name}</Typography>
-                        <li>
-                            <NavLink>Logout</NavLink>
-                        </li>
-                    </div>
-                ) : (
+            {!user?.result ? (
+                <li>
+                    <NavLink
+                        to={{
+                            pathname: "/auth",
+                        }}
+                    >
+                        LOGIN
+                    </NavLink>
+                </li>
+            ) : (
+                <>
                     <li>
-                        <NavLink to="/auth">Login</NavLink>
+                        <NavLink to="/abstract/create">CREATE</NavLink>
                     </li>
-                )
-            }
+                </>
+            )}
+            {user?.result && (
+                <li>
+                    <Button
+                        style={{ fontWeight: "bold", font: "inherit" }}
+                        onClick={logout}
+                    >
+                        LOGOUT
+                    </Button>
+                </li>
+            )}
         </ul>
     )
 }

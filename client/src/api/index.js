@@ -1,7 +1,20 @@
 import axios from 'axios';
 
-const url = 'http://localhost:5000/abstracts';
+const API = axios.create({ baseURL: 'http://localhost:5000' })
 
-export const fetchAbstracts = () => axios.get(url);
-export const createAbstract = (newAbstract) => axios.post(url, newAbstract);
-export const deleteAbstract = (id) => axios.delete(`${url}/${id}`);
+API.interceptors.request.use((req) => {
+    if (localStorage.getItem("profile")) {
+      req.headers.Authorization = `Bearer ${
+        JSON.parse(localStorage.getItem("profile")).token
+      }`;
+    }
+  
+    return req;
+  });
+
+export const fetchAbstracts = () => API.get('/abstracts');
+export const createAbstract = (newAbstract) => API.post('/abstracts', newAbstract);
+export const deleteAbstract = (id) => API.delete(`/abstracts/${id}`);
+
+export const signIn = (formData) => API.post('/users/signin', formData);
+export const signUp = (formData) => API.post('/users/signup', formData);
