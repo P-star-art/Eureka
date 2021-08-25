@@ -12,23 +12,39 @@ import {
     ButtonBase,
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
+import axios from 'axios';
 
 import { deleteAbstract } from '../actions/abstracts';
 import useStyles from './styles';
 import { getAbstracts } from '../actions/abstracts';
 import './Feed.css';
+import { useParams } from 'react-router-dom';
+
+
 
 const Feed = () => {
-
     const dispatch = useDispatch();
     const classes = useStyles();
     const user = JSON.parse(localStorage.getItem("profile"))
-
+    const [abstracts, setAbstracts] = useState([]);
+    // const abstracts = useSelector((state) => state.abstracts);
+    // useEffect(() => {
+    //     dispatch(getAbstracts());
+    // }, [])
+    const { id } = useParams();
+    console.log(id);
     useEffect(() => {
-        dispatch(getAbstracts());
+        axios.get("http://localhost:5000/abstracts")
+            .then(res => {
+                const x = res.data.filter((abstract) => {
+                    return abstract.creator === id
+                })
+                setAbstracts(x);
+            })
+            .catch(err => {
+                console.log(err);
+            })
     }, [])
-
-    const abstracts = useSelector((state) => state.abstracts);
     console.log(abstracts);
 
     return (

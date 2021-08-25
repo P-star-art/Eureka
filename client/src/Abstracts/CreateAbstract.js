@@ -30,7 +30,7 @@ const CreateAbstract = () => {
         e.preventDefault();
         dispatch(createAbstract({...abstractData, name: user?.result?.teamName }));
         clear();
-        history.push("/feed");
+        history.push("/");
     }
 
     useEffect(() => {

@@ -39,9 +39,9 @@ const NavLinks = () => {
             <li>
                 <NavLink to="/" exact>Home</NavLink>
             </li>
-            <li>
+            {/* <li>
                 <NavLink to="/feed">Eureka 4.0 Feed</NavLink>
-            </li>
+            </li> */}
             <li>
                 <NavLink to="/eureka3">Eureka 3.0</NavLink>
             </li>

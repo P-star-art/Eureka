@@ -34,7 +34,7 @@ function App() {
         <Route path="/abstract/create" exact>
           <CreateAbstract />
         </Route>
-        <Route path="/feed" exact>
+        <Route path="/feed/:id" exact>
           <Feed />
         </Route>
       </main>
