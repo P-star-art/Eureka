@@ -12,7 +12,7 @@ const Home = () => {
     const history = useHistory();
 
     useEffect(() => {
-        axios.get('http://localhost:5000/users')
+        axios.get('https://eurekaches.herokuapp.com/users')
             .then((res) => {
                 setUsers(res.data);
             })

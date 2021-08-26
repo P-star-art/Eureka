@@ -34,7 +34,7 @@ const Feed = () => {
     const { id } = useParams();
     console.log(id);
     useEffect(() => {
-        axios.get("http://localhost:5000/abstracts")
+        axios.get("https://eurekaches.herokuapp.com/abstracts")
             .then(res => {
                 const x = res.data.filter((abstract) => {
                     return abstract.creator === id
