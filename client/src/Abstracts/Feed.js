@@ -28,9 +28,9 @@ const Feed = () => {
     const user = JSON.parse(localStorage.getItem("profile"))
     const [abstracts, setAbstracts] = useState([]);
     // const abstracts = useSelector((state) => state.abstracts);
-    // useEffect(() => {
-    //     dispatch(getAbstracts());
-    // }, [])
+    useEffect(() => {
+        dispatch(getAbstracts());
+    }, [abstracts])
     const { id } = useParams();
     console.log(id);
     useEffect(() => {

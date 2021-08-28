@@ -16,7 +16,7 @@ import { signin, signup } from '../../actions/auth';
 import Input from './Input';
 import useStyles from "./styles";
 
-const initialState = { teamName: '', title: '', members: '', mentors: '', summary: '', password: '', confirmPassword: '' }
+const initialState = { teamName: '', title: '', members: '', mentors: '', password: '', confirmPassword: '' }
 
 const Auth = () => {
 
@@ -90,16 +90,6 @@ const Auth = () => {
                                 <Input
                                     name="mentors"
                                     label="Mentors"
-                                    handleChange={handleChange}
-                                    type="text"
-                                />
-                            </>
-                        )}
-                        {isSignUp && (
-                            <>
-                                <Input
-                                    name="summary"
-                                    label="Summary"
                                     handleChange={handleChange}
                                     type="text"
                                 />
